@@ -5,8 +5,9 @@ body {
 
 .content {
   display: flex;
-  min-height: 100vh;
-  line-height: 1.1;
+  margin: 16px;
+  min-width: calc(100% - 32px);
+  min-height: calc(100vh - 32px);
   text-align: center;
   flex-direction: column;
   justify-content: center;
