@@ -1,0 +1,23 @@
+{
+  "name": "todo",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "rsbuild dev --open",
+    "build": "rsbuild build",
+    "preview": "rsbuild preview"
+  },
+  "dependencies": {
+    "antd": "^5.20.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "1.0.1-rc.0",
+    "@rsbuild/plugin-react": "1.0.1-rc.0",
+    "@types/react": "^18.3.4",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.5.2"
+  }
+}
