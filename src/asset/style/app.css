@@ -27,7 +27,7 @@ body {
 }
 
 .ant-list-items {
-  height: 80vh;
+  height: calc(80vh - 48px);
   overflow-y: scroll;
 }
 

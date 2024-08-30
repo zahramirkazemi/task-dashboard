@@ -15,7 +15,7 @@ const TaskList: React.FC = () => {
         header={<div>ToDo</div>}
         bordered
         loading={isLoading}
-        style={{ width: '45%'}}
+        style={{ width: '45%', height: '80vh'}}
         dataSource={taskList.filter((task) => !task.completed)}
         renderItem={(item) => <List.Item key={item.id}>{renderItem(item)}</List.Item>}
       />
@@ -23,7 +23,7 @@ const TaskList: React.FC = () => {
         header={<div>Done</div>}
         bordered
         loading={isLoading}
-        style={{ width: '45%'}}
+        style={{ width: '45%', height: '80vh'}}
         dataSource={taskList.filter((task) => task.completed)}
         renderItem={(item) => <List.Item key={item.id}>{renderItem(item)}</List.Item>}
       />
