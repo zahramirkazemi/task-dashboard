@@ -1,12 +1,12 @@
-import Todo from "../type/todo";
+import Task from "../type/task";
 
-export async function fetchTaskList(): Promise<Array<Todo>> {
+export async function fetchTaskList(): Promise<Array<Task>> {
 	const response = await fetch('https://jsonplaceholder.typicode.com/todos');
-	const todoList = await response.json();
-	return todoList;
+	const taskList = await response.json();
+	return taskList;
 }
 
-export async function updateTask(id: number, checked: boolean): Promise<Todo> {
+export async function updateTask(id: number, checked: boolean): Promise<Task> {
 	const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
 		method: 'PATCH',
 		body: JSON.stringify({
@@ -16,6 +16,6 @@ export async function updateTask(id: number, checked: boolean): Promise<Todo> {
 			'Content-type': 'application/json; charset=UTF-8',
 		},
 	});
-	const updatedTodo = await response.json();
-	return updatedTodo;	
+	const updatedTask = await response.json();
+	return updatedTask;	
 }

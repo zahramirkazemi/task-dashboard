@@ -1,13 +1,13 @@
 import { Checkbox, CheckboxProps, Flex, List } from "antd";
-import useTodoStore from "../store/todo";
-import { Todo } from "../type";
+import useTaskStore from "../store/task";
+import { Task } from "../type";
 
 const TaskList: React.FC = () => {
-  const { isLoading, todoList, updateTask } = useTodoStore();
+  const { isLoading, taskList, updateTask } = useTaskStore();
 
   const handleTaskCheck = (id: number, checked: boolean): Promise<void> => updateTask(id, checked);
 
-  const renderItem = (item: Todo): JSX.Element => <Checkbox onChange={(event) => handleTaskCheck(item.id, event.target.checked)} checked={item.completed} className={item.completed? 'checked-task': ''}>{item.title}</Checkbox>
+  const renderItem = (item: Task): JSX.Element => <Checkbox onChange={(event) => handleTaskCheck(item.id, event.target.checked)} checked={item.completed} className={item.completed? 'checked-task': ''}>{item.title}</Checkbox>
 
   return (
     <Flex gap="middle" align="start" justify="space-around">
@@ -16,7 +16,7 @@ const TaskList: React.FC = () => {
         bordered
         loading={isLoading}
         style={{ width: '45%'}}
-        dataSource={todoList.filter((todo) => !todo.completed)}
+        dataSource={taskList.filter((task) => !task.completed)}
         renderItem={(item) => <List.Item key={item.id}>{renderItem(item)}</List.Item>}
       />
       <List
@@ -24,7 +24,7 @@ const TaskList: React.FC = () => {
         bordered
         loading={isLoading}
         style={{ width: '45%'}}
-        dataSource={todoList.filter((todo) => todo.completed)}
+        dataSource={taskList.filter((task) => task.completed)}
         renderItem={(item) => <List.Item key={item.id}>{renderItem(item)}</List.Item>}
       />
     </Flex>

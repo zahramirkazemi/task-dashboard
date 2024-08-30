@@ -1,3 +1,3 @@
-export type { default as Todo } from './todo';
-export type { TodoStore, TodoStoreSet } from './todo-store';
+export type { default as Task } from './task';
+export type { TaskStore, TaskStoreSet } from './task-store';
 export type { ThemeStore, ThemeStoreSet } from './theme-store';

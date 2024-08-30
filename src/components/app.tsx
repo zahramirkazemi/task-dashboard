@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { ConfigProvider } from "antd";
 import { darkTheme, lightTheme } from "../constant";
-import useTodoStore from "../store/todo";
+import useTaskStore from "../store/task";
 import useThemeStore from "../store/theme";
 import "../asset/style/app.css";
 import Header from "./header";
@@ -9,7 +9,7 @@ import TaskList from "./task-list";
 
 const App = () => {
   const { isDarkTheme } = useThemeStore();
-  const { fetchTaskList } = useTodoStore();
+  const { fetchTaskList } = useTaskStore();
 
   useEffect(() => {
     fetchTaskList();
