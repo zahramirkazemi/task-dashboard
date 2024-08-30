@@ -7,7 +7,7 @@ import useTaskStore from "../store/task";
 const LiveSearch: React.FC = () => {
   const { searchTask } = useTaskStore();
   const [query, setQuery] = useState("");
-  const debouncedQuery = useDebounce(query, 1000);
+  const debouncedQuery = useDebounce(query);
 
   useEffect(() => {
     if (debouncedQuery) {
