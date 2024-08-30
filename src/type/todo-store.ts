@@ -3,7 +3,8 @@ import Todo from "./todo"
 export type TodoStore = {
 	todoList: Array<Todo>,
 	isLoading: boolean,
-	fetchTodoList: () => Promise<void>,
+	fetchTaskList: () => Promise<void>,
+	updateTask: (id: number, checked: boolean) => Promise<void>,
 }
 
 export type TodoStoreSet =

@@ -3,13 +3,11 @@ import useTodoStore from "../store/todo";
 import { Todo } from "../type";
 
 const TaskList: React.FC = () => {
-  const { isLoading, todoList } = useTodoStore();
+  const { isLoading, todoList, updateTask } = useTodoStore();
 
-  const handleCheck :CheckboxProps['onChange'] = (e) => {
-    console.log(`checked = ${e.target.checked}`);
-  };
+  const handleTaskCheck = (id: number, checked: boolean): Promise<void> => updateTask(id, checked);
 
-  const renderItem = (item: Todo): JSX.Element => <Checkbox onChange={handleCheck} checked={item.completed} className={item.completed? 'checked-task': ''}>{item.title}</Checkbox>
+  const renderItem = (item: Todo): JSX.Element => <Checkbox onChange={(event) => handleTaskCheck(item.id, event.target.checked)} checked={item.completed} className={item.completed? 'checked-task': ''}>{item.title}</Checkbox>
 
   return (
     <Flex gap="middle" align="start" justify="space-around">

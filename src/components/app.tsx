@@ -9,10 +9,10 @@ import TaskList from "./task-list";
 
 const App = () => {
   const { isDarkTheme } = useThemeStore();
-  const { fetchTodoList } = useTodoStore();
+  const { fetchTaskList } = useTodoStore();
 
   useEffect(() => {
-    fetchTodoList();
+    fetchTaskList();
   }, []);
 
   useEffect(() => {
