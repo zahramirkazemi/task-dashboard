@@ -1,0 +1,45 @@
+html.light-theme {
+  background-color: #EEEEEE;
+}
+
+html.dark-theme {
+  background-color: #222831;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+}
+
+.content {
+  display: flex;
+  margin: 16px;
+  min-width: calc(100% - 32px);
+  min-height: calc(100vh - 32px);
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+}
+
+.search-input {
+  width: 96%;
+}
+
+.ant-list-items {
+  height: 80vh;
+  overflow-y: scroll;
+}
+
+.ant-list-items::-webkit-scrollbar {
+	width: 8px;
+}
+
+.ant-list-items::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color: #595e9b;
+}
+
+.checked-task {
+  text-decoration: line-through #595e9b;
+}
