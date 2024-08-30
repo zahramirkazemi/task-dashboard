@@ -15,11 +15,11 @@ const useTaskStore = create<TaskStore>()((set) => ({
     }
   },
   updateTask: async (id: number, checked: boolean) => {
-    const task = await updateTask(id, checked);
+    const updatedTask = await updateTask(id, checked);
     set((state) => ({
       ...state,
       taskList: state.taskList.map((task) =>
-        task.id === id ? { ...task, completed: checked } : task
+        task.id === updatedTask.id ? { ...task, completed: updatedTask.completed} : task
       ),
     }));
   },
