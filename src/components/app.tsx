@@ -1,29 +1,33 @@
-import { useEffect, useState } from "react";
-import { ConfigProvider, Flex, List } from "antd";
+import { useEffect } from "react";
+import { ConfigProvider } from "antd";
 import { darkTheme, lightTheme } from "../constant";
-import "../style/app.css";
 import useTodoStore from "../store/todo";
-import TodoList from "./todo-list";
+import useThemeStore from "../store/theme";
+import "../asset/style/app.css";
+import Header from "./header";
+import TaskList from "./task-list";
 
 const App = () => {
-  const [isDarkMode, setDarkMode] = useState(true);
-  const { todoList, fetchTodoList } = useTodoStore();
+  const { isDarkTheme } = useThemeStore();
+  const { fetchTodoList } = useTodoStore();
 
   useEffect(() => {
     fetchTodoList();
   }, []);
 
+  useEffect(() => {
+    document.documentElement.className = isDarkTheme ? 'dark-theme' : 'light-theme';
+  }, [isDarkTheme]);
+
   return (
     <ConfigProvider
       theme={{
-        token: isDarkMode ? darkTheme : lightTheme,
+        token: isDarkTheme ? darkTheme : lightTheme,
       }}
     >
       <div className="content">
-        <Flex gap="middle" align="start" justify="space-around">
-          <TodoList listTitle='Todo' listItems={todoList.filter(todo => !todo.completed)} />
-          <TodoList listTitle='Done!' listItems={todoList.filter(todo => todo.completed)} />
-        </Flex>
+        <Header/>
+        <TaskList/>
       </div>
     </ConfigProvider>
   );
