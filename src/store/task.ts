@@ -4,12 +4,13 @@ import { TaskStore } from "../type";
 
 const useTaskStore = create<TaskStore>()((set) => ({
   taskList: [],
+  allTasks: [],
   isLoading: false,
   fetchTaskList: async () => {
     set((state) => ({ ...state, isLoading: true, taskList: [] }));
     try {
       const taskList = await fetchTaskList();
-      set((state) => ({ ...state, taskList }));
+      set((state) => ({ ...state, taskList, allTasks: taskList }));
     } finally {
       set((state) => ({ ...state, isLoading: false }));
     }
@@ -21,8 +22,17 @@ const useTaskStore = create<TaskStore>()((set) => ({
       taskList: state.taskList.map((task) =>
         task.id === updatedTask.id ? { ...task, completed: updatedTask.completed} : task
       ),
+      allTasks: state.allTasks.map((task) =>
+        task.id === updatedTask.id ? { ...task, completed: updatedTask.completed} : task
+      ),
     }));
   },
+  searchTask: (query: string) => {
+    set((state) => ({
+      ...state,
+      taskList: state.allTasks.filter((task) => task.title.includes(query)),
+    }));
+  }
 }));
 
 export default useTaskStore;
