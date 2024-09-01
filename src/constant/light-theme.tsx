@@ -1,7 +1,8 @@
 const lightTheme = {
   colorPrimary: '#595e9b',
   colorTextBase: '#222831',
-  colorSplit: '#d9d9d9',
+  colorSplit: 'transparent',
+  colorBorderSecondary: '#595e9b',
   colorPrimaryBg: '#EEEEEE',
   colorBgContainer: '#EEEEEE',
   colorIcon: '#EEEEEE'

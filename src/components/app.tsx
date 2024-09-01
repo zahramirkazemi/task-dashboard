@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { ConfigProvider } from "antd";
+
 import { darkTheme, lightTheme } from "../constant";
 import useTaskStore from "../store/task";
 import useThemeStore from "../store/theme";
 import "../asset/style/app.css";
+
 import Header from "./header";
-import TaskList from "./task-list";
+import TaskBoard from "./task-board";
 
 const App = () => {
   const { isDarkTheme } = useThemeStore();
@@ -27,7 +29,7 @@ const App = () => {
     >
       <div className="content">
         <Header/>
-        <TaskList/>
+        <TaskBoard/>
       </div>
     </ConfigProvider>
   );
