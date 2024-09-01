@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { updateTask, fetchTaskList } from "../api";
-import { TaskStore } from "../type";
+import { TaskState, TaskStore } from "../type";
 
 const useTaskStore = create<TaskStore>()((set) => ({
   taskList: [],
@@ -9,7 +9,11 @@ const useTaskStore = create<TaskStore>()((set) => ({
   fetchTaskList: async () => {
     set((state) => ({ ...state, isLoading: true, taskList: [] }));
     try {
-      const taskList = await fetchTaskList();
+      const RawTaskList = await fetchTaskList();
+      const taskList = RawTaskList.map((task) => ({
+        ...task,
+        state: task.completed ? TaskState.Done : Math.random() > 0.5 ? TaskState.Doing : TaskState.ToDo,
+      }));
       set((state) => ({ ...state, taskList, allTasks: taskList }));
     } finally {
       set((state) => ({ ...state, isLoading: false }));
@@ -20,10 +24,14 @@ const useTaskStore = create<TaskStore>()((set) => ({
     set((state) => ({
       ...state,
       taskList: state.taskList.map((task) =>
-        task.id === updatedTask.id ? { ...task, completed: updatedTask.completed} : task
+        task.id === updatedTask.id
+          ? { ...task, completed: updatedTask.completed }
+          : task
       ),
       allTasks: state.allTasks.map((task) =>
-        task.id === updatedTask.id ? { ...task, completed: updatedTask.completed} : task
+        task.id === updatedTask.id
+          ? { ...task, completed: updatedTask.completed }
+          : task
       ),
     }));
   },
@@ -32,7 +40,7 @@ const useTaskStore = create<TaskStore>()((set) => ({
       ...state,
       taskList: state.allTasks.filter((task) => task.title.includes(query)),
     }));
-  }
+  },
 }));
 
 export default useTaskStore;

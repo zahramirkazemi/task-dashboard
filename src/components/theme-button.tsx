@@ -9,7 +9,7 @@ const ThemeButton = () => {
     <FloatButton
       shape="circle"
       type="primary"
-      style={{ insetInlineEnd: 8, insetBlockEnd: 12 }}
+      className="theme-button"
       onClick={changeTheme}
       icon={isDarkTheme ? <SunFilled /> : <MoonFilled />}
     />

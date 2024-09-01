@@ -1,5 +1,4 @@
-import { Flex, Input } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import { Flex } from "antd";
 import ThemeButton from "./theme-button";
 import LiveSearch from "./search";
 
