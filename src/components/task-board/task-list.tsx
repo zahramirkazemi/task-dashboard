@@ -1,6 +1,6 @@
 import { Divider, List } from "antd";
-import useTaskStore from "../store/task";
-import { Task } from "../type";
+import useTaskStore from "../../store/task";
+import { Task } from "../../type";
 import TaskCard from "./task";
 
 interface TaskListProps {
@@ -23,7 +23,7 @@ const TaskList: React.FC<TaskListProps> = ({
         dataSource={listItems}
         renderItem={(item) => (
           <List.Item key={item.id}>
-            <TaskCard taskTitle={item.title} />
+            <TaskCard taskTitle={item.title} taskId={item.id}/>
           </List.Item>
         )}
       />
