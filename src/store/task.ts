@@ -75,11 +75,11 @@ const useTaskStore = create<TaskStore>()((set) => ({
     }
   },
   deleteTask: async (id: number) => {
-    const deletedTask = await deleteTask(id);
+    deleteTask(id);
     set((state) => ({
       ...state,
-      taskList: state.taskList.filter((task) => task.id !== deletedTask.id),
-      allTasks: state.allTasks.filter((task) => task.id !== deletedTask.id),
+      taskList: state.taskList.filter((task) => task.id !== id),
+      allTasks: state.allTasks.filter((task) => task.id !== id),
     }));
   },
   searchTask: (query: string) => {

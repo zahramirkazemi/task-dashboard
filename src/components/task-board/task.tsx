@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Card, Input } from "antd";
 import useTaskStore from "../../store/task";
 import TaskModal from "./task-modal";
@@ -13,10 +13,11 @@ const TaskCard: React.FC<TaskCardProps> = ({
   taskTitle,
   taskId,
 }: TaskCardProps) => {
-  const { editTaskError, editTask, clearErrors } = useTaskStore();
+  const { editTaskError, editTask, clearErrors, deleteTask } = useTaskStore();
   const [title, setTitle] = useState(taskTitle);
   const [openTaskModal, setOpenTaskModal] = useState(false);
   const handleModalOpen = (): void => setOpenTaskModal(true);
+  const handleDeleteTask = (): Promise<void> => deleteTask(taskId);
   const handleClose = (): void => {
     setOpenTaskModal(false);
     clearErrors();
@@ -30,6 +31,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
   };
   const actions: React.ReactNode[] = [
     <EditOutlined onClick={handleModalOpen} key="edit" />,
+    <DeleteOutlined onClick={handleDeleteTask} key="delete" />,
   ];
 
   return (
