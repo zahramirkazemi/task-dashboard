@@ -14,13 +14,13 @@ const Header: React.FC = () => {
   const handleClose = (): void => {
     setOpenCreateTask(false);
     clearErrors();
+    setNewTaskTitle('');
   }
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void =>
     setNewTaskTitle(event.target.value)
   const handleSubmit = (): void => {
     createTask(newTaskTitle);
     handleClose();
-    setNewTaskTitle('');
   }
 
   return (
