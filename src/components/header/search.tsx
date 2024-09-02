@@ -10,18 +10,13 @@ const LiveSearch: React.FC = () => {
   const debouncedQuery = useDebounce(query);
 
   useEffect(() => {
-    if (debouncedQuery) {
-      searchTask(debouncedQuery);
-    }
+    searchTask(debouncedQuery);
   }, [debouncedQuery]);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void =>
     setQuery(event.target.value);
 
-  const handleClear = (): void => {
-    setQuery("");
-    searchTask("");
-  };
+  const handleClear = (): void => setQuery("");
 
   return (
     <Input
