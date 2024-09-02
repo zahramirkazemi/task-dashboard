@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import useDebounce from "../utils/debounce";
-import useTaskStore from "../store/task";
+import useDebounce from "../../utils/debounce";
+import useTaskStore from "../../store/task";
 
 const LiveSearch: React.FC = () => {
   const { searchTask } = useTaskStore();

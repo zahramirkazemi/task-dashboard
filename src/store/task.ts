@@ -1,38 +1,85 @@
 import { create } from "zustand";
-import { updateTask, fetchTaskList } from "../api";
-import { TaskState, TaskStore } from "../type";
+import { fetchTaskList, deleteTask, editTask, createTask } from "../api";
+import { Task, TaskState, TaskStore } from "../type";
 
 const useTaskStore = create<TaskStore>()((set) => ({
   taskList: [],
   allTasks: [],
   isLoading: false,
+  newTaskError: "",
+  editTaskError: "",
   fetchTaskList: async () => {
     set((state) => ({ ...state, isLoading: true, taskList: [] }));
     try {
       const RawTaskList = await fetchTaskList();
       const taskList = RawTaskList.map((task) => ({
         ...task,
-        state: task.completed ? TaskState.Done : Math.random() > 0.5 ? TaskState.Doing : TaskState.ToDo,
+        state: task.completed
+          ? TaskState.Done
+          : Math.random() > 0.5
+          ? TaskState.Doing
+          : TaskState.ToDo,
       }));
       set((state) => ({ ...state, taskList, allTasks: taskList }));
     } finally {
       set((state) => ({ ...state, isLoading: false }));
     }
   },
-  updateTask: async (id: number, checked: boolean) => {
-    const updatedTask = await updateTask(id, checked);
+  updateTask: (id: number, taskState: TaskState) => {
     set((state) => ({
       ...state,
       taskList: state.taskList.map((task) =>
-        task.id === updatedTask.id
-          ? { ...task, completed: updatedTask.completed }
-          : task
+        task.id === id ? { ...task, state: taskState } : task
       ),
       allTasks: state.allTasks.map((task) =>
-        task.id === updatedTask.id
-          ? { ...task, completed: updatedTask.completed }
-          : task
+        task.id === id ? { ...task, state: taskState } : task
       ),
+    }));
+  },
+  createTask: async (title: string) => {
+    const createdTask = await createTask(title);
+    try {
+      set((state) => ({
+        ...state,
+        taskList: [createdTask,...state.taskList, ],
+        allTasks: [createdTask, ...state.allTasks],
+      }));
+    } catch {
+      set((state) => ({
+        ...state,
+        newTaskError: "there is an error for creating new task.",
+      }));
+    }
+  },
+  editTask: async (id: number, title: string) => {
+    const editedTask = await editTask(id, title);
+    try {
+      set((state) => ({
+        ...state,
+        taskList: state.taskList.map((task) =>
+          task.id === editedTask.id
+            ? { ...task, title: editedTask.title }
+            : task
+        ),
+        allTasks: state.allTasks.map((task) =>
+          task.id === editedTask.id
+            ? { ...task, title: editedTask.title }
+            : task
+        ),
+      }));
+    } catch {
+      set((state) => ({
+        ...state,
+        editTaskError: "there is an error in editing task.",
+      }));
+    }
+  },
+  deleteTask: async (id: number) => {
+    const deletedTask = await deleteTask(id);
+    set((state) => ({
+      ...state,
+      taskList: state.taskList.filter((task) => task.id !== deletedTask.id),
+      allTasks: state.allTasks.filter((task) => task.id !== deletedTask.id),
     }));
   },
   searchTask: (query: string) => {
@@ -41,6 +88,8 @@ const useTaskStore = create<TaskStore>()((set) => ({
       taskList: state.allTasks.filter((task) => task.title.includes(query)),
     }));
   },
+  clearErrors: () =>
+    set((state) => ({ ...state, newTaskError: "", editTaskError: "" })),
 }));
 
 export default useTaskStore;

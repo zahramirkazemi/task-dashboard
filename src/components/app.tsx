@@ -18,18 +18,18 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    document.documentElement.className = isDarkTheme ? 'dark-theme' : 'light-theme';
+    document.documentElement.className = isDarkTheme
+      ? "dark-theme"
+      : "light-theme";
   }, [isDarkTheme]);
 
   return (
     <ConfigProvider
-      theme={{
-        token: isDarkTheme ? darkTheme : lightTheme,
-      }}
+      theme={isDarkTheme ? darkTheme : lightTheme}
     >
       <div className="content">
-        <Header/>
-        <TaskBoard/>
+        <Header />
+        <TaskBoard />
       </div>
     </ConfigProvider>
   );

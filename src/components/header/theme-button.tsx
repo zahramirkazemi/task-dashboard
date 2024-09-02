@@ -1,6 +1,6 @@
 import { FloatButton } from "antd";
 import { MoonFilled, SunFilled } from "@ant-design/icons";
-import useThemeStore from "../store/theme";
+import useThemeStore from "../../store/theme";
 
 const ThemeButton = () => {
   const {isDarkTheme , changeTheme } = useThemeStore();

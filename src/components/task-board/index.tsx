@@ -1,7 +1,7 @@
 import { Flex } from "antd";
-import useTaskStore from "../store/task";
 import TaskList from "./task-list";
-import { TaskState } from "../type";
+import { TaskState } from "../../type";
+import useTaskStore from "../../store/task";
 
 const TaskBoard: React.FC = () => {
   const { taskList } = useTaskStore();

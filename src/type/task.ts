@@ -5,7 +5,7 @@ interface Task {
   id: number,
   title: string,
   completed: boolean,
-  state: TaskState;
+  state?: TaskState,
 }
 
 export default Task;
