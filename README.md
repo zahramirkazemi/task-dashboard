@@ -1,6 +1,8 @@
 # Task Dashboard
-![image](https://github.com/user-attachments/assets/86d4b79b-10d6-40fd-94c4-84156dffc752)
-![image](https://github.com/user-attachments/assets/7f546312-900d-4fb2-afa6-bf975a2770f6)
+![image](https://github.com/user-attachments/assets/1aaa226b-dd53-492c-aa13-f777a6f63be9)
+![image](https://github.com/user-attachments/assets/aafd03b6-1279-4fe2-aca7-5b715932eec9)
+![image](https://github.com/user-attachments/assets/bdce6b1a-81cc-4aa3-8b84-8e8b8d415226)
+
 
 ## technologies
 React - Zustand - Typescript - Rspack - Ant design
