@@ -36,6 +36,14 @@ body {
   justify-content: space-between;
 }
 
+.task-card.grabbed {
+  border-width: 2px;
+}
+
+.holder.grabbed {
+  cursor: grabbing;
+}
+
 .ant-card-body {
   text-align: start;
 }

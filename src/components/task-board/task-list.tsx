@@ -1,4 +1,5 @@
 import { Divider, List } from "antd";
+import { useDroppable } from "@dnd-kit/core";
 import useTaskStore from "../../store/task";
 import { Task } from "../../type";
 import TaskCard from "./task";
@@ -13,9 +14,12 @@ const TaskList: React.FC<TaskListProps> = ({
   listItems,
 }: TaskListProps) => {
   const { isLoading } = useTaskStore();
+  const { setNodeRef } = useDroppable({
+    id: listTitle,
+  });
 
   return (
-    <div className="task-list-container">
+    <div ref={setNodeRef} className="task-list-container">
       <Divider>{listTitle}</Divider>
       <List
         loading={isLoading}
