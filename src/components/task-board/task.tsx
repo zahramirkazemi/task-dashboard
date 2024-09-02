@@ -1,5 +1,10 @@
-import { useEffect, useState } from "react";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import { useDraggable } from "@dnd-kit/core";
+import {
+  DeleteOutlined,
+  EditOutlined,
+  HolderOutlined,
+} from "@ant-design/icons";
 import { Card, Input } from "antd";
 import useTaskStore from "../../store/task";
 import TaskModal from "./task-modal";
@@ -7,17 +12,23 @@ import TaskModal from "./task-modal";
 interface TaskCardProps {
   taskId: number;
   taskTitle: string;
+  grabbed?: boolean;
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({
   taskTitle,
   taskId,
+  grabbed,
 }: TaskCardProps) => {
+  const { attributes, listeners, setNodeRef } = useDraggable({
+    id: taskId,
+  });
   const { editTaskError, editTask, clearErrors, deleteTask } = useTaskStore();
   const [title, setTitle] = useState(taskTitle);
   const [openTaskModal, setOpenTaskModal] = useState(false);
   const handleModalOpen = (): void => setOpenTaskModal(true);
   const handleDeleteTask = (): Promise<void> => deleteTask(taskId);
+
   const handleClose = (): void => {
     setOpenTaskModal(false);
     clearErrors();
@@ -32,11 +43,18 @@ const TaskCard: React.FC<TaskCardProps> = ({
   const actions: React.ReactNode[] = [
     <EditOutlined onClick={handleModalOpen} key="edit" />,
     <DeleteOutlined onClick={handleDeleteTask} key="delete" />,
+    <HolderOutlined className={`holder ${grabbed ? "grabbed" : ""}`} {...listeners} key="holder" />,
   ];
 
   return (
     <>
-      <Card actions={actions} size="small" className="task-card">
+      <Card
+        ref={setNodeRef}
+        {...attributes}
+        actions={actions}
+        size="small"
+        className={`task-card ${grabbed ? "grabbed" : ""}`}
+      >
         {taskTitle}
       </Card>
       <TaskModal
